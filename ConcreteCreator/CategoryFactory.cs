@@ -9,22 +9,20 @@ namespace CategorizeTrade.ConcreteCreator
 {
 	public class CategoryFactory : CategoryFactoryMethod
 	{
-		public override Category CategorizeTrade(DateTime dateRef, string transaction)
+		public override Category CategorizeTrade(ProductInput productInput)
 		{
 			CultureInfo ci = new CultureInfo("en-US");
 			Thread.CurrentThread.CurrentCulture = ci;
-			string[] transactionPart = transaction.Split(" ");
-			DateTime dtTransaction = Convert.ToDateTime(transactionPart[2]);
 
-			if(dateRef.Date > dtTransaction.Date.AddDays(-30))
+			if(productInput.DataRef.Date > productInput.NextPaymentDate.Date.AddDays(-30))
 			{	
 				return new Expired();
 			}
-			else if(Convert.ToDouble(transactionPart[0]) > 1000000 && string.Compare(transactionPart[1].Trim().ToUpper(), "Private", true) == 0)
+			else if(Convert.ToDouble(productInput.Value) > 1000000 && string.Compare(productInput.ClientSector, "Private", true) == 0)
 			{
 				return new HighRisk();
 			}
-			else if(Convert.ToDouble(transactionPart[0]) > 1000000 && string.Compare(transactionPart[1].Trim().ToUpper(), "Public", true) == 0)
+			else if(Convert.ToDouble(productInput.Value) > 1000000 && string.Compare(productInput.ClientSector, "Public", true) == 0)
 			{
 				return new MediumRisk();
 			}

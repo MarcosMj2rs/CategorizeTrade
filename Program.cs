@@ -26,11 +26,16 @@ namespace CategorizeTrade
 				productInput.Transaction.Add("5000000 Public 01/02/2024");
 				productInput.Transaction.Add("3000000 Public 10/26/2023");
 
+
 				CategoryFactory factory = new CategoryFactory();
 
 				foreach(var item in productInput.Transaction)
 				{
-					Console.WriteLine(factory.CategorizeTrade(productInput.DataRef, item).Description);
+					productInput.Value = Convert.ToDouble(item.Split(" ")[0]);
+					productInput.ClientSector = item.Split(" ")[1].Trim();
+					productInput.NextPaymentDate = Convert.ToDateTime(item.Split(" ")[2]);
+
+					Console.WriteLine(factory.CategorizeTrade(productInput).Description);
 				}
 			}
 			catch(Exception ex)

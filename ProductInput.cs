@@ -6,11 +6,11 @@ namespace CategorizeTrade
 {
 	public class ProductInput : ITrade
 	{
-		public double Value { get; }
+		public double Value { get; set; }
 
-		public string ClientSector { get; }
+		public string ClientSector { get; set; }
 
-		public DateTime NestpaymentDate { get; }
+		public DateTime NextPaymentDate { get; set; }
 
 		public DateTime DataRef { get; set; }
 
