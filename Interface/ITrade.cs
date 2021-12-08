@@ -9,7 +9,7 @@ namespace CategorizeTrade.Interface
 
 		string ClientSector { get; }
 
-		DateTime NestpaymentDate { get; }
+		DateTime NextPaymentDate { get; }
 
 	}
 }
